@@ -1,0 +1,71 @@
+<style>
+.link,
+.link a,
+.signupframe
+{
+	color: #226699;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	}
+	.link,
+	.link a {
+		text-decoration: none;
+		}
+	.signupframe {
+		border: 1px solid #000000;
+		background: #ffffff;
+		}
+.signupframe .required {
+	font-size: 10px;
+	}
+</style>
+<form method="post" action="https://app.icontact.com/icp/signup.php" name="icpsignup" id="icpsignup2460" accept-charset="UTF-8" onsubmit="return verifyRequired2460();" >
+<input type="hidden" name="redirect" value="http://www.icontact.com/www/signup/thanks.html">
+<input type="hidden" name="errorredirect" value="http://www.icontact.com/www/signup/error.html">
+
+<div id="SignUp">
+<table width="260" class="signupframe" border="0" cellspacing="0" cellpadding="5">
+	<tr>
+      <td valign="top" align="right">
+        <span class="required">*</span>&nbsp;Email
+      </td>
+      <td align="left">
+        <input type="text" name="fields_email">
+      </td>
+    </tr>
+    <input type="hidden" name="listid" value="14623">
+    <input type="hidden" name="specialid:14623" value="D2H8">
+
+    <input type="hidden" name="clientid" value="773175">
+    <input type="hidden" name="formid" value="2460">
+    <input type="hidden" name="reallistid" value="1">
+    <input type="hidden" name="doubleopt" value="1">
+    <tr>
+      <td>&nbsp;</td>
+      <td><span class="required">*</span> = Required Field</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="Submit" value="Submit"></td>
+    </tr>
+    </table>
+</div>
+</form>
+<script type="text/javascript">
+
+var icpForm2460 = document.getElementById('icpsignup2460');
+
+if (document.location.protocol === "https:")
+
+	icpForm2460.action = "https://app.icontact.com/icp/signup.php";
+function verifyRequired2460() {
+  if (icpForm2460["fields_email"].value == "") {
+    icpForm2460["fields_email"].focus();
+    alert("The Email field is required.");
+    return false;
+  }
+
+
+return true;
+}
+</script>

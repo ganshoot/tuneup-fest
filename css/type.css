@@ -1,0 +1,199 @@
+/*responsive fonts*/
+
+
+
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,600,700);
+@import url(http://fonts.googleapis.com/css?family=Bangers);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400);
+
+body  {
+   background-color: #000000;
+}
+
+
+// =========================================
+// ResponsiveFonts
+// =========================================
+// Config
+$base-width:960 !default;  // Width @ 100% layout or 1:1
+$min-width:320  !default;  // Minimum width
+$max-width:1200 !default;  // Maximum width
+
+$ResponsiveFonts-init:false !default;          // only run once
+@mixin ResponsiveFonts($args...){
+  @if($ResponsiveFonts-init==false){
+    $ResponsiveFonts-init:true;
+    $s:floor($min-width*100/$base-width);      // loop start counter
+    $e:ceil($max-width*100/$base-width);       // loop end counter
+    $r:$base-width/100;                        // ratio (pixel in percent of basewidth)
+    $l:();                                     // list to hold passed selectors
+    @for $i from 1 through length($args){
+      $l:append($l,unquote(nth($args,$i)),comma);
+    }
+    $l:if(length($l)==0,unquote('.responsive-fonts'),$l);
+    @for $i from $s through $e {
+      $p:percentage($i/$base-width)*$r;        // font-size percentage
+      $t:if($i==$s,max,min);                   // media query type min/max
+      $w:round(if($i==$s,($r*$i)+($r - 1)*1px,$r*$i*1px)); // media query width
+      @media (#{$t}-width:$w){                 // build mediaquery
+        #{$l}{ font-size:$p;}                  // percentual font-size
+      }
+    }
+  }
+}
+
+
+
+
+$yellow-1:#ffce00;
+$yellow-2:#ffc200;
+$yellow-3:#ffbb00;
+
+
+%clearfix {&:after {content:'';display: table;clear: both;}}
+%rounded {
+  -webkit-border-radius: 0.8em;
+          border-radius: 0.8em;
+  background-clip: padding-box;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  margin:0; padding:0; text-decoration:none; outline:none
+}
+article,header,figure,img {display:block; }
+html { font-size:100%; line-height:100%;}
+pre  { margin:1em 0;}
+.responsive-fonts { font-size:100%;}
+.responsive-fonts span { font:400 4.9em 'Raleway', sans-serif;}
+
+html{ background:$yellow-1;}
+article { padding:3% 6%; margin:0 auto; min-width:$min-width * 1px; max-width:$max-width * 1px;  }
+figure    { position:relative; margin:3rem 0 0; }
+figcaption{ position:absolute; top:32%; font:3em 'Bangers', cursive; }
+img       { width:100%; }
+pre       { white-space:pre-wrap;}
+h1        { text-transform:uppercase; }
+h2        { font:500 1.618rem/2.291 'Raleway', sans-serif; margin-bottom:2.291rem - 1.618rem;}
+h3        { font:400 1.416rem/1.618 'Raleway', sans-serif; margin-bottom:1.618rem - 1.416rem;}
+p,dt,dd,li{ font:300 1rem 'Lato', sans-serif; line-height:1.416rem; margin-bottom:1.416 - 1rem;}
+
+dl        { margin:1.618em; @extend %clearfix; }
+dt, dd    { float:left; }
+dt        { clear:left; width:100px; font-weight:400; }
+ul        {list-style:none;}
+li        {padding-left:1rem;}
+
+.em span  { font-size:2em; }
+.rem span { font-size:2rem; }
+.pct span { font-size:200%; }
+.px span  { font-size:32px; }
+
+.done    { text-decoration:line-through; }
+
+// Add media queries
+// Note! only the first @include will be effective
+$base-width:960; // Width @ 100% layout or 1:1
+$min-width:320;  // Minimum width
+$max-width:1200; // Maximum width
+@include ResponsiveFonts();      // default
+//@include ResponsiveFonts(html);  // Scale all em, rem and %
+//@include ResponsiveFonts(body);  // Scale all em and % (rems are relative to body)
+//@include ResponsiveFonts('.rfs');// I'm lazy don't want .responsive-font-size
+//@include ResponsiveFonts('.foo','.bar'); // Other selectors just add
+
+
+// CSS GEnerator
+fieldset,pre { @extend %clearfix; border:0; padding:3% 5%; background:$yellow-2; @extend %rounded; }
+label,a,button  { font:400 1em 'Lato', sans-serif; line-height:1.416rem; margin-bottom:1.416 - 1rem;}
+label    { text-indent:5%; width:100%; float:left; clear:left; margin:0.2rem;}
+input,textarea    { font-size:100%; padding:1%; width:75%; float:left; margin-right:-100%; margin-left:20%;  }
+textarea {font-size:0.5em}
+a { color:#333;
+    &:hover { background:#333; color:$yellow-1;}
+  }
+//a        { display:block; padding:0.2rem; font-size:1.416rem; color:#fff; text-decoration:none; display:none; }
+textarea { resize: none;  }
+button   { width:75%;  background:#231f20; color:#fff; padding:0.8em; float:left; border:1px solid #e3a600;  margin:1% 0 0; margin-right:-100%; margin-left:20%;}
+@media (max-width:640px){
+  label { font-size:1.2em; text-indent:0;}
+  input,button,textarea { width:100%; margin:1% 0 0;}
+}
+
+::-webkit-selection { background:#fff0b2;  }
+   ::-moz-selection { background:#fff0b2; }
+        ::selection { background:#fff0b2;  }
+
+@media (max-width:327px){.responsive-fonts{font-size:31%;}}
+@media (min-width:328px){.responsive-fonts{font-size:32%;}}
+@media (min-width:338px){.responsive-fonts{font-size:33%;}}
+@media (min-width:348px){.responsive-fonts{font-size:34%;}}
+@media (min-width:358px){.responsive-fonts{font-size:35%;}}
+@media (min-width:369px){.responsive-fonts{font-size:36%;}}
+@media (min-width:379px){.responsive-fonts{font-size:37%;}}
+@media (min-width:389px){.responsive-fonts{font-size:38%;}}
+@media (min-width:399px){.responsive-fonts{font-size:39%;}}
+@media (min-width:410px){.responsive-fonts{font-size:40%;}}
+@media (min-width:420px){.responsive-fonts{font-size:41%;}}
+@media (min-width:430px){.responsive-fonts{font-size:42%;}}
+@media (min-width:440px){.responsive-fonts{font-size:43%;}}
+@media (min-width:451px){.responsive-fonts{font-size:44%;}}
+@media (min-width:461px){.responsive-fonts{font-size:45%;}}
+@media (min-width:471px){.responsive-fonts{font-size:46%;}}
+@media (min-width:481px){.responsive-fonts{font-size:47%;}}
+@media (min-width:492px){.responsive-fonts{font-size:48%;}}
+@media (min-width:502px){.responsive-fonts{font-size:49%;}}
+@media (min-width:512px){.responsive-fonts{font-size:50%;}}
+@media (min-width:522px){.responsive-fonts{font-size:51%;}}
+@media (min-width:532px){.responsive-fonts{font-size:52%;}}
+@media (min-width:543px){.responsive-fonts{font-size:53%;}}
+@media (min-width:553px){.responsive-fonts{font-size:54%;}}
+@media (min-width:563px){.responsive-fonts{font-size:55%;}}
+@media (min-width:573px){.responsive-fonts{font-size:56%;}}
+@media (min-width:584px){.responsive-fonts{font-size:57%;}}
+@media (min-width:594px){.responsive-fonts{font-size:58%;}}
+@media (min-width:604px){.responsive-fonts{font-size:59%;}}
+@media (min-width:614px){.responsive-fonts{font-size:60%;}}
+@media (min-width:625px){.responsive-fonts{font-size:61%;}}
+@media (min-width:635px){.responsive-fonts{font-size:62%;}}
+@media (min-width:645px){.responsive-fonts{font-size:63%;}}
+@media (min-width:655px){.responsive-fonts{font-size:64%;}}
+@media (min-width:666px){.responsive-fonts{font-size:65%;}}
+@media (min-width:676px){.responsive-fonts{font-size:66%;}}
+@media (min-width:686px){.responsive-fonts{font-size:67%;}}
+@media (min-width:696px){.responsive-fonts{font-size:68%;}}
+@media (min-width:707px){.responsive-fonts{font-size:69%;}}
+@media (min-width:717px){.responsive-fonts{font-size:70%;}}
+@media (min-width:727px){.responsive-fonts{font-size:71%;}}
+@media (min-width:737px){.responsive-fonts{font-size:72%;}}
+@media (min-width:748px){.responsive-fonts{font-size:73%;}}
+@media (min-width:758px){.responsive-fonts{font-size:74%;}}
+@media (min-width:768px){.responsive-fonts{font-size:75%;}}
+@media (min-width:778px){.responsive-fonts{font-size:76%;}}
+@media (min-width:788px){.responsive-fonts{font-size:77%;}}
+@media (min-width:799px){.responsive-fonts{font-size:78%;}}
+@media (min-width:809px){.responsive-fonts{font-size:79%;}}
+@media (min-width:819px){.responsive-fonts{font-size:80%;}}
+@media (min-width:829px){.responsive-fonts{font-size:81%;}}
+@media (min-width:840px){.responsive-fonts{font-size:82%;}}
+@media (min-width:850px){.responsive-fonts{font-size:83%;}}
+@media (min-width:860px){.responsive-fonts{font-size:84%;}}
+@media (min-width:870px){.responsive-fonts{font-size:85%;}}
+@media (min-width:881px){.responsive-fonts{font-size:86%;}}
+@media (min-width:891px){.responsive-fonts{font-size:87%;}}
+@media (min-width:901px){.responsive-fonts{font-size:88%;}}
+@media (min-width:911px){.responsive-fonts{font-size:89%;}}
+@media (min-width:922px){.responsive-fonts{font-size:90%;}}
+@media (min-width:932px){.responsive-fonts{font-size:91%;}}
+@media (min-width:942px){.responsive-fonts{font-size:92%;}}
+@media (min-width:952px){.responsive-fonts{font-size:93%;}}
+@media (min-width:963px){.responsive-fonts{font-size:94%;}}
+@media (min-width:973px){.responsive-fonts{font-size:95%;}}
+@media (min-width:983px){.responsive-fonts{font-size:96%;}}
+@media (min-width:993px){.responsive-fonts{font-size:97%;}}
+@media (min-width:1004px){.responsive-fonts{font-size:98%;}}
+@media (min-width:1014px){.responsive-fonts{font-size:99%;}}
+
+
